@@ -148,3 +148,97 @@ const log = console.log.bind(console)
 // for (var i = 1; i < fibonacci.length; i++) {
 //   log(fibonacci[i])
 // }
+
+// create Stack
+// function Stack() {
+//   let items = []
+
+//   this.push = function(element) {
+//     items.push(element)
+//   }
+
+//   this.pop = function () {
+//     return items.pop()
+//   }
+
+//   this.peek = function () {
+//     return items[items.length - 1]
+//   }
+
+//   this.isEmpty = function () {
+//     return items.length == 0
+//   }
+
+//   this.size = function () {
+//     return items.length
+//   }
+
+//   this.clear = function () {
+//     items = []
+//   }
+
+//   this.print = function () {
+//     log(items.toString())
+//   }
+// }
+
+// let stack = new Stack()
+// log(stack.isEmpty()) // true
+
+// stack.push(5)
+// stack.push(8)
+// log(stack.peek()) // 8
+
+// stack.push(11)
+// log(stack.size()) // 3
+// log(stack.isEmpty()) // false
+
+// stack.push(15)
+
+// stack.pop()
+// stack.pop()
+// log(stack.size()) // 2
+// stack.print()
+
+// class Stack
+// let _items = Symbol()
+
+// class Stack {
+//   constructor() {
+//     this[_items] = []
+//   }
+//   push(element) {
+//     this[_items].push(element)
+//   }
+//   print() {
+//     log(this[_items].toString())
+//   }
+// }
+
+// let stack = new Stack()
+// stack.push(5)
+// stack.push(8)
+// let objectSymbols = Object.getOwnPropertySymbols(stack)
+// log(objectSymbols.length) // 1
+// log(objectSymbols) // [Symbos()]
+// log(objectSymbols[0]) // Symbos()
+// stack[objectSymbols[0]].push(1)
+// stack.print() // 5, 8, 1
+
+// const items = new WeakMap()
+
+// class Stack {
+//   constructor() {
+//     items.set(this, {})
+//   }
+//   push(element) {
+//     let s = items.get(this)
+//     s.push(element)
+//   }
+//   pop() {
+//     let s = item.geet(this)
+//     let r = s.pop()
+//     return r
+//   }
+// }
+
