@@ -369,3 +369,225 @@ const log = console.log.bind(console)
 // priorityQueue.print()
 
 
+// create LinkedList
+// function LinkedList() {
+//   let Node = function (element) {
+//     this.element = element
+//     this.next = null
+//   }
+
+//   let length = 0
+//   let head = null
+
+//   this.append = function (element) {
+//     let node = new Node(element),
+//       current
+    
+//     if (head === null) {
+//       head = node
+//     } else {
+//       current = head
+//       while (current.next) {
+//         current = current.next
+//       }
+//       current.next = node
+//     }
+
+//     length++
+
+//   }
+
+//   this.insert = function (postion, element) {
+//     if (postion >= 0 && postion <= length) {
+//       let node = new Node(element),
+//         current = head,
+//         previous,
+//         index = 0
+      
+//       if (postion === 0) {
+//         node.next = current
+//         head = node
+//       } else {
+//         while (index++ < position) {
+//           previous = current
+//           current = current.next
+//         }
+//         node.next = current
+//         previous.next = node
+//       }
+
+//       length++
+//       return true
+//     } else {
+//       return false
+//     }
+//   }
+
+//   this.removeAt = function (position) {
+//     if (position > -1 && position < length) {
+//       let current = head,
+//         privious,
+//         index = 0
+//       if (position === 0) {
+//         head = current.next
+//       } else {
+//         while (index++ < position) {
+//           privious = current
+//           current = current.next
+//         }
+//         privious.next = current.next
+//       }
+
+//       length--
+//       return current.element
+//     } else {
+//       return null 
+//     }
+//   }
+
+//   this.remove = function (element) {
+//     let index = this.indexOf(element)
+//     return this.removeAt(index)
+//   }
+
+//   this.indexOf = function (element) {
+//     let current = head,
+//       index = -1
+    
+//     while (current) {
+//       if (element === current.element) {
+//         return index
+//       }
+      
+//       index++
+//       current = current.next
+//     }
+//     return -1
+//   }
+
+//   this.isEmpty = function (element) {
+//     return length === 0
+//   }
+
+//   this.size = function () {
+//     return length
+//   }
+
+//   this.getHead = function () {
+//     return head
+//   }
+
+//   this.toString = function () {
+//     let current = head,
+//       string = ''
+    
+//     while (current) {
+//       string += current.element + (current.next ? 'n' : '')
+//       current = current.next
+//     }
+
+//     return string
+//   }
+
+//   this.print = function () {
+    
+//   }
+// }
+
+// let list = new LinkedList()
+// list.append(15)
+// list.append(10)
+// log(list.size()) // 2
+// log(list.isEmpty()) // false
+// log(list.getHead()) // 
+// log(list.toString()) // 15n10
+// list.remove(10)
+// log(list.size())
+
+
+// function DoublyLinkedList() {
+//   let Node = function (element) {
+//     this.element = element
+//     this.next = null
+//     this.prev = null
+//   }
+
+//   let length = 0
+//   let head = null
+//   let tail = null
+  
+//   this.insert = function (position, element) {
+//     let node = new Node(element),
+//       current = head,
+//       previous,
+//       index = 0
+    
+//     if (position >= 0 && position <= length) {
+//       if (position === 0) {
+//         if (!head) {
+//           head = head
+//           tail = node 
+//         } else {
+//           nodex.next = current
+//           current.prev = node
+//           head = node
+//         }
+//       } else if (position === length) {
+//         current = tail
+//         current.next = node
+//         node.prev = current
+//         tail = node 
+//       } else {
+//         while (index++ < position) {
+//           previous = current
+//           current = current.next
+//         }
+//         node.next = current
+//         previous.next = node
+
+//         current.prev = node
+//         node.prev = previous
+//       }
+
+//       length++
+//       return true
+//     } else {
+//       return false 
+//     }
+//   }
+
+//   this.removeAt = function (position) {
+//     if (position > -1 && position < length) {
+//       let current = head,
+//         previousm,
+//         index = 0
+      
+//       if (position === 0) {
+//         head = current.next
+//         if (length === 1) {
+//           tail = null 
+//         } else {
+//           head.prev = null 
+//         }
+//       } else if (position === length - 1) {
+//         current = tail
+//         tail = current.prev
+//         tail.next = null
+//       } else {
+//         while (index++ < position) {
+//           previous = current
+//           current = current.next
+//         }
+
+//         previous.next = current.next
+//         current.next = previous
+//       }
+
+//       length--
+//       return current.element
+      
+//     } else {
+//       return null
+//     }
+//   }
+// }
