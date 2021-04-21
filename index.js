@@ -591,3 +591,84 @@ const log = console.log.bind(console)
 //     }
 //   }
 // }
+
+// create Set
+function Set() {
+  let items = {}
+
+  this.has = function (value) {
+    return items.hasOwnProperty(value)
+  }
+
+  this.add = function (value) {
+    if (!this.has(value)) {
+      items[value] = value
+      return true
+    }
+    return false
+  }
+
+  this.remove = function (value) {
+    if (this.has(value)) {
+      delete items[value]
+      return true
+    }
+    return false
+  }
+
+  this.clear = function () {
+    items = {}
+  }
+
+  this.size = function () {
+    return Object.keys(items).length
+  }
+
+  this.values = function () {
+    let values = []
+    for (let i = 0, keys = Object.keys(items); i < keys.length; i++) {
+      values.push(items[keys[i]])
+    }
+    return values
+  }
+
+  this.union = function (otherSet) {
+    let unionSet = new Set()
+
+    let values = this.values()
+    for (let i = 0; i < values.length; i++) {
+      unionSet.add(values[i])
+    }
+
+    values = otherSet.values()
+    for (let i = 0; i < values.length; i++) {
+      unionSet.add(values[i])
+    }
+    
+    return unionSet
+  }
+
+}
+
+// let set = new Set()
+// set.add(1)
+// set.add(2)
+// log(set.size()) // 2
+// log(set.values()) //  [1, 2]
+// log(set.has(1)) // true
+// log(set.remove(1)) // true
+// log(set.values()) // [2]
+
+// let setA = new Set()
+// setA.add(1)
+// setA.add(2)
+// setA.add(3)
+
+// let setB = new Set()
+// setB.add(3)
+// setB.add(4)
+// setB.add(5)
+// setB.add(6)
+
+// let unionAB = setA.union(setB)
+// log(unionAB.values()) // [1, 2, 3, 4, 5, 6]
