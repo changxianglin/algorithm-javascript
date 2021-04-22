@@ -593,62 +593,101 @@ const log = console.log.bind(console)
 // }
 
 // create Set
-function Set() {
-  let items = {}
+// function Set() {
+//   let items = {}
 
-  this.has = function (value) {
-    return items.hasOwnProperty(value)
-  }
+//   this.has = function (value) {
+//     return items.hasOwnProperty(value)
+//   }
 
-  this.add = function (value) {
-    if (!this.has(value)) {
-      items[value] = value
-      return true
-    }
-    return false
-  }
+//   this.add = function (value) {
+//     if (!this.has(value)) {
+//       items[value] = value
+//       return true
+//     }
+//     return false
+//   }
 
-  this.remove = function (value) {
-    if (this.has(value)) {
-      delete items[value]
-      return true
-    }
-    return false
-  }
+//   this.remove = function (value) {
+//     if (this.has(value)) {
+//       delete items[value]
+//       return true
+//     }
+//     return false
+//   }
 
-  this.clear = function () {
-    items = {}
-  }
+//   this.clear = function () {
+//     items = {}
+//   }
 
-  this.size = function () {
-    return Object.keys(items).length
-  }
+//   this.size = function () {
+//     return Object.keys(items).length
+//   }
 
-  this.values = function () {
-    let values = []
-    for (let i = 0, keys = Object.keys(items); i < keys.length; i++) {
-      values.push(items[keys[i]])
-    }
-    return values
-  }
+//   this.values = function () {
+//     let values = []
+//     for (let i = 0, keys = Object.keys(items); i < keys.length; i++) {
+//       values.push(items[keys[i]])
+//     }
+//     return values
+//   }
 
-  this.union = function (otherSet) {
-    let unionSet = new Set()
+//   this.union = function (otherSet) {
+//     let unionSet = new Set()
 
-    let values = this.values()
-    for (let i = 0; i < values.length; i++) {
-      unionSet.add(values[i])
-    }
+//     let values = this.values()
+//     for (let i = 0; i < values.length; i++) {
+//       unionSet.add(values[i])
+//     }
 
-    values = otherSet.values()
-    for (let i = 0; i < values.length; i++) {
-      unionSet.add(values[i])
-    }
+//     values = otherSet.values()
+//     for (let i = 0; i < values.length; i++) {
+//       unionSet.add(values[i])
+//     }
     
-    return unionSet
-  }
+//     return unionSet
+//   }
 
-}
+//   this.intersection = function (otherSet) {
+//     let intersectionSet = new Set()
+
+//     let values = this.values()
+//     for (let i = 0; i < values.length; i++) {
+//       if (otherSet.has(values[i])) {
+//         intersectionSet.add(values[i])
+//       }
+//     }
+
+//     return intersectionSet
+//   }
+
+//   this.difference = function(otherSet) {
+//     let differenceSet = new Set()
+
+//     let values = this.values()
+//     for (let i = 0; i < values.length; i++) {
+//       if (!otherSet.has(values[i])) {
+//         differenceSet.add(values[i])
+//       }
+//     }
+
+//     return differenceSet
+//   }
+
+//   this.subset = function (otherSet) {
+//     if (this.size() > otherSet.size()) {
+//       return false
+//     } else {
+//       let values = this.values()
+//       for (let i = 0; i < values.length; i++) {
+//         if (!otherSet.has(values[i])) {
+//           return false
+//         }
+//       }
+//       return true
+//     }
+//   }
+// }
 
 // let set = new Set()
 // set.add(1)
@@ -672,3 +711,68 @@ function Set() {
 
 // let unionAB = setA.union(setB)
 // log(unionAB.values()) // [1, 2, 3, 4, 5, 6]
+
+// let setA = new Set()
+// setA.add(1)
+// setA.add(2)
+// setA.add(3)
+
+// let setB = new Set()
+// setB.add(2)
+// setB.add(3)
+// setB.add(4)
+
+// let intersectionAB = setA.intersection(setB)
+// log(intersectionAB.values()) // [2, 3]
+
+// let setA = new Set()
+// setA.add(1)
+// setA.add(2)
+// setA.add(3)
+
+// let setB = new Set()
+// setB.add(2)
+// setB.add(3)
+// setB.add(4)
+
+// let intersectionAB = setA.difference(setB)
+// log(intersectionAB.values()) // [1]
+
+// let setA = new Set()
+// setA.add(1)
+// setA.add(2)
+
+
+// let setB = new Set()
+// setB.add(1)
+// setB.add(2)
+// setB.add(3)
+
+// let setC = new Set()
+// setC.add(2)
+// setC.add(3)
+// setC.add(4)
+
+// log(setA.subset(setB)) // true
+// log(setA.subset(setC)) // false 
+
+// let set = new Set()
+// set.add(1)
+// log(set.values()) // @iterator
+// log(set.has(1)) // true
+// log(set.size) // 1
+
+// let setA = new Set()
+// setA.add(1)
+// setA.add(2)
+// setA.add(3)
+
+
+// let setB = new Set()
+// setB.add(1)
+// setB.add(2)
+// setB.add(3)
+
+// let unionAb = new Set()
+// for (let x of setA) unionAb.add(x)
+// for (let x of setB) unionAb.add(x)
