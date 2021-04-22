@@ -776,3 +776,160 @@ const log = console.log.bind(console)
 // let unionAb = new Set()
 // for (let x of setA) unionAb.add(x)
 // for (let x of setB) unionAb.add(x)
+
+// create map
+// function Dictionary() {
+//   let items = {}
+
+//   this.has = function(key) {
+//     return key in items
+//   }
+
+//   this.set = function (key, value) {
+//     items[key] = value
+//   }
+
+//   this.delete = function (key) {
+//     if (this.has(key)) {
+//       delete items[key]
+//       return true
+//     }
+//     return false
+//   }
+
+//   this.get = function (key) {
+//     return this.has(key) ? items[key] : undefined
+//   }
+
+//   this.values = function () {
+//     var values = []
+//     for (var k in items) {
+//       if (this.has(k)) {
+//         values.push(items[k])
+//       }
+//     }
+
+//     return values
+//   }
+
+//   this.keys = function () {
+//     return Object.keys(items)
+//   }
+
+//   this.size = function () {
+//     return Object.keys(items).length
+//   }
+
+//   this.clear = function () {
+//     items = {}
+//   }
+
+//   this.getItems = function () {
+//     return items
+//   }
+// }
+
+// var dictionary = new Dictionary()
+// dictionary.set('Gandalf', 'gandalf@email.com')
+// dictionary.set('John', 'johnsnow@email.com')
+// dictionary.set('Tyrion', 'Tyrion@email.com')
+// log(dictionary.has('Gandalf')) // true
+// log(dictionary.size()) // 3
+// log(dictionary.keys()) // ['Gandalf', 'John', 'Tyrion']
+// log(dictionary.values()) // ['gandalf@email.com', 'johnsnow@email.com', 'Tyrion@email.com' ]
+// log(dictionary.get('Tyrion')) // Tyrion@email.com
+
+// dictionary.delete('John')
+// log(dictionary.keys()) // ['Gandalf', 'Tyrion']
+// log(dictionary.values()) // ['gandalf@email.com', 'Tyrion@email.com' ]
+// log(dictionary.getItems()) // { Gandalf: 'gandalf@email.com', Tyrion: 'Tyrion@email.com' }
+
+// create hashTable
+// function HashTable() {
+//   var table = []
+
+//   var loseoseHashCode = function (key) {
+//     var hash = 0
+//     for (var i = 0; i < key.length; i++) {
+//       hash += key.charCodeAt(i)
+//     }
+//     return hash % 37
+//   }
+  
+//   this.put = function (key, value) {
+//     var position = loseoseHashCode(key)
+//     log(position + ' - ' + key)
+//     table[position] = value
+//   }
+
+//   this.get = function (key) {
+//     return table[loseoseHashCode(key)]
+//   }
+
+//   this.remove = function (key) {
+//     table[loseoseHashCode(key)] = undefined
+//   }
+
+//   this.print = function () {
+//     for (var i = 0; i < table.length; ++i) {
+//       if (table[i] != undefined) {
+//         log(i + ': ' + table[i])
+//       }
+//     }
+//   }
+
+//   var ValuePair = function (key, value) {
+//     this.key = key
+//     this.value = value
+
+//     this.toString = function () {
+//       return '[' + this.key + ' - ' + this.value + ']'
+//     }
+//   }
+// }
+
+// // var hash = new HashTable()
+// // hash.put('Gandalf', 'gandalf@email.com') // 19 - Gandalf
+// // hash.put('John', 'johnsnow@email.com') // 29 - John
+// // hash.put('Tyrion', 'tyrion@email.com') // 16 - Tyrion
+
+// // log(hash.get('Gandalf')) // gandalf@email.com
+// // log(hash.get('Loiane')) // undefined
+
+// // hash.remove('Gandalf')
+// // log(hash.get('Gandalf')) // undefined
+
+// var hash = new HashTable();
+// hash.put('Gandalf', 'gandalf@email.com');
+// hash.put('John', 'johnsnow@email.com');
+// hash.put('Tyrion', 'tyrion@email.com');
+// hash.put('Aaron', 'aaron@email.com');
+// hash.put('Donnie', 'donnie@email.com');
+// hash.put('Ana', 'ana@email.com');
+// hash.put('Jonathan', 'jonathan@email.com');
+// hash.put('Jamie', 'jamie@email.com');
+// hash.put('Sue', 'sue@email.com');
+// hash.put('Mindy', 'mindy@email.com');
+// hash.put('Paul', 'paul@email.com');
+// hash.put('Nathan', 'nathan@email.com');
+
+// log('---')
+// hash.print()
+
+// var map = new Map()
+
+// map.set('Gandalf', 'gandalf@email.com');
+// map.set('John', 'johnsnow@email.com');
+// map.set('Tyrion', 'tyrion@email.com');
+
+// console.log(map.has('Gandalf')); //输出true
+// console.log(map.size); //输出3
+// console.log(map.keys()); //输出["Gandalf", "John", "Tyrion"]
+// console.log(map.values()); //输出["gandalf@email.com", "johnsnow@email.com", "tyrion@email.com"]
+// console.log(map.get('Tyrion')); //输出tyrion@email.com
+
+// map.delete('John')
+// log(map.size) // 2
+// map.clear()
+// log(map.size) // 0
+
