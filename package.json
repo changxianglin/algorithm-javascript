@@ -4,7 +4,7 @@
   "description": "A book about algorithm javascript.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon graph.js",
+    "start": "nodemon sequense.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
