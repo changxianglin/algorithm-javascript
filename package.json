@@ -4,7 +4,9 @@
   "description": "A book about algorithm javascript.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon complexity.js",
+    "start": "nodemon demo1.js",
+    "build": "webpack",
+    "server": "webpack serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +21,9 @@
   },
   "homepage": "https://github.com/changxianglin/algorithm-javascript#readme",
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "webpack": "^5.36.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   }
 }
