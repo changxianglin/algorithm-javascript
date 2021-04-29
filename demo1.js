@@ -79,3 +79,113 @@ var createLoginLayer = (function () {
 })()
 
 // createLoginLayer()
+
+var mult = (function () {
+  var cache = {}
+  return function () {
+    var args = Array.prototype.join.call(arguments, ',')
+    if (cache[args]) {
+      return cache[args]
+    }
+    var a = 1
+    for (var i = 0, l = arguments.length; i < l; i++) {
+      a = a * arguments[i]
+    }
+    return cache[args] = a
+  }
+})()
+
+// mult(1, 2, 3)
+
+window.onload = function () {
+  log(document.getElementsByTagName('*').length)
+}
+
+Function.prototype.after = function (afterfn) {
+  var _self = this
+  return function () {
+    var ret = _self.apply(this, arguments)
+    afterfn.apply(this, arguments)
+    return ret
+  }
+}
+
+window.onload = (window.onload || function () { }).after(function () {
+  log(document.getElementsByTagName('*').length)
+})
+
+log('....')
+
+//  v1
+// var makeSound = function (animal) {
+//   if (animal instanceof Duck) {
+//     log('嘎嘎嘎')
+//   } else if (animal instanceof Chicken) {
+//     log('咯咯咯')
+//   } else if (animal instanceof Dog) {
+//     log('汪汪汪')
+//   }
+// }
+
+// var Duck = function () { }
+// var Chicken = function () { }
+
+// makeSound(new Duck())
+// makeSound(new Chicken())
+
+// var Dog = function () { }
+// makeSound(new Dog())
+
+// v2
+var makeSound = function (animal) {
+  animal.sound()
+}
+
+var Duck = function () { }
+
+Duck.prototype.sound = function () {
+  log('嘎嘎嘎')
+}
+
+var Chicken = function () { }
+
+Chicken.prototype.sound = function () {
+  log('咯咯咯')
+}
+
+makeSound(new Duck())
+makeSound(new Chicken())
+
+var Dog = function () { }
+Dog.prototype.sound = function () {
+  log('汪汪汪')
+}
+
+makeSound(new Dog())
+
+log('map')
+
+var arrayMap = function (ary, callback) {
+  var i = 0,
+    length = ary.length,
+    value,
+    ret = []
+  
+  for (; i < length; i++) {
+    value = callback(i, ary[i])
+    ret.push(value)
+  }
+
+  return ret
+}
+
+var a = arrayMap([1, 2, 3], function (i, n) {
+  return n * 2
+})
+
+var b = arrayMap([1, 2, 3], function (i, n) {
+  return n * 3
+})
+
+log(a)
+log(b)
