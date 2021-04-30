@@ -49,9 +49,10 @@ class Compiler {
     // 获得 app 节点
     this.el = document.getElementById(vm.$el)
 
+    this.vm = vm
+
     // 获得 app 节点下面的内容, 并把他们暂时存在 fragment 节点中
     let fragment = this.getFragment(this.el)
-    console.log(fragment)
 
     // 编译 fragment 节点中的内容
     this.compile(fragment)
@@ -71,7 +72,53 @@ class Compiler {
     return fragment
   }
 
-  compile(fragment) {
+  compileElement(node) {
+    let attrs = node.attributes
+    if (attrs.length > 0) {
+      let vmodel = attrs.getNamedItem('v-model')
+      if (vmodel) {
+        var expr = vmodel.value
+        Utils.model(node, expr, this.vm)
+      }
+    }
+  }
 
+  compileText() {
+
+  }
+
+  compile(fragment) {
+    let childnode = fragment.childNodes;
+    [...childnode].forEach(node => {
+      let nodeType = node.nodeType
+      // 编译元素节点的内容
+      if (nodeType === 1) {
+        this.compileElement(node)
+      }
+
+      // 编译文本节点的内容
+      if (nodeType === 3) {
+        this.compileText()
+      }
+    })
+  }
+}
+
+let Utils = {
+  getValue(data, expr) {
+    return expr.replace(/\{\{(.*?)\}\}/, (...args) => {
+      return data[args[1]]
+    })
+  },
+
+  model(node, expr, vm) {
+    let value = this.getValue(vm.$data, expr)
+    this.updater.model(node, value)
+  },
+
+  updater: {
+    model: (node, value) => {
+      node.value = value
+    }
   }
 }
