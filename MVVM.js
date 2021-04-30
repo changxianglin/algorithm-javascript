@@ -50,3 +50,46 @@ class MVVM {
     this.$data = new Proxy(data. handler)
   }
 }
+
+class Dep {
+  constructor(data) {
+    this.watchTask = {}
+    Object.keys(data).forEach(key => {
+      this.watchTask[key] = []
+    })
+  }
+
+  // 添加 watcher
+  add(key, keys, node, vm, type) {
+    this.watchTask[key].push(new Watcher(node, vm, keys, type))
+  }
+
+  // 通知 wather
+  notify(key) {
+    this.watchTask[key].forEach(task => {
+      task.update()
+    })
+  }
+}
+
+class Watcher {
+  constructor(el, vm, keys, type) {
+    this.el = el
+    this.vm = vm
+    this.keys = keys
+    this.type = type
+  }
+
+  // 更新依赖
+  update() {
+    if (this.keys.length > 1) {
+      let v = null
+      this.keys.forEach(val => {
+        v = !v ? this.vm.$data[val] : v[val]
+      })
+      this.el[this.type] = v
+    } else {
+      this.el[this.type] = this.vm.$data[this.keys[0]]
+    }
+  }
+}
