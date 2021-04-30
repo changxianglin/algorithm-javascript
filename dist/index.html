@@ -21,15 +21,12 @@
 <script src="mvvm.js"></script> 
 <script>
   let vm = new Mvvm({
-    el: '#app',
+    el: 'app',
     data: {
       msg: '文字',
       web: '模拟 mvvm 框架'
     }
   })
-
-  vm.$data.msg = '123'
-  console.log(vm.$data.msg)
 </script>
 </body>
 </html>
