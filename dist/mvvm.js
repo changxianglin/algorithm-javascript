@@ -6,6 +6,18 @@ class Mvvm {
 
     new Observer(this.$data)
     new Compiler(this.vm)
+
+    this.proxy(this.$data)
+  }
+
+  proxy(data) {
+    for (let key in data) {
+      Object.defineProperty(this, key, {
+        get() {
+          return data[key]
+        }
+      })
+    }
   }
 }
 
