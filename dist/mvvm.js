@@ -157,13 +157,26 @@ class Compiler {
 
 let Utils = {
   getValue(data, expr) {
-    return expr.replace(/\{\{(.*?)\}\}/, (...args) => {
+    return expr.replace(/\{\{(.*?)\}\}/g, (...args) => {
       return data[args[1]]
+    })
+  },
+
+  getKey(expr) {
+    return expr.replace(/\{\{(.*?)\}\}/g, (...args) => {
+      return args[1]
     })
   },
 
   model(node, expr, vm) {
     let value = this.getValue(vm.$data, expr)
+    let key = this.getKey(expr)
+
+    node.addEventListener('input', e => {
+      let value = e.target.value
+      vm.$data[key] = value
+    }, false)
+
     this.updater.model(node, value)
   },
 
