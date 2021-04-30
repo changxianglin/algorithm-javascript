@@ -8,11 +8,16 @@ class MVVM {
       this.DataProxy(key)
     })
 
+    this.$setParent(this.$data)
+
+    this.dep = new Dep(this.$data)
+
     this._Observe(this.$data)
 
     this.list.push(11)
 
     console.log(this.list)
+    console.log(this.dep.watchTask)
   }
 
   DataProxy(key) {
@@ -30,6 +35,7 @@ class MVVM {
   }
 
   _Observe(data) {
+    let that = this
     let handler = {
       get(target, key) {
         let item = target[key]
@@ -42,12 +48,37 @@ class MVVM {
       set(target, key, value) {
         if (target[key] !== value) {
           target[value] = value
-          console.log('改更新了')
+          if (target.__parent) {
+            that.dep.notify(that.getParent(target).__name)
+          } else {
+            that.dep.notify(key)
+          }
         }
         return true
       }
     }
     this.$data = new Proxy(data. handler)
+  }
+
+  // 设置父级属性
+  SetParent(datas) {
+    for (let i in datas) {
+      if (typeof datas[i] === 'object') {
+        if (i !== '__parent' && i !== '__proto__') {
+          datas[i].__parent = datas
+          datas[i].__name = i
+          this.$setParent(datas[i])
+        }
+      }
+    }
+  }
+
+  // 获得 __parent
+  getParent(target) {
+    while (target.__parent && target__parent.__parent) {
+      target = target.__parent
+    }
+    return target
   }
 }
 

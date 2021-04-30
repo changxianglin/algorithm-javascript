@@ -6,9 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+  <style>
+    [v-v-cloak] {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <div id='test'></div>
-  <script src="main.js"></script>
+  <div id='app'>
+    <h1 v-cloak>{{text}}</h1>
+    <input type="text">
+    <input type="text">
+    <button @click="changeText">按钮</button>
+  </div>
+  <script src="./main.js"></script>
+  <script>
+    new MVVM({
+      el: '#app',
+      data: {
+        text: 'this is a title',
+        student: {
+          name: 'panda'
+        },
+        list: [1, 2, 3, 4]
+      },
+      methods: {
+        changeText() {
+          this.text = 'this is a panda'
+        }
+      }
+    })
+  </script>
 </body>
 </html>
