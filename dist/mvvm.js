@@ -6,13 +6,6 @@ class Mvvm {
 
     new Observer(this.$data)
     new Compiler(this.vm)
-    let watcher = new Watcher(this.vm, 'msg', (newValue, oldVal) => {
-      console.log(newValue, oldVal)
-    })
-
-    let dep = new Dep()
-    dep.addSub(watcher)
-    dep.notify()
   }
 }
 
@@ -35,6 +28,7 @@ class Observer {
     // value 可能是对象, 需要递归设置
     this.observer(value)
 
+    let dep = new Dep()
     Object.defineProperty(data, key, {
       set(newValue) {
         console.log('set called')
@@ -42,9 +36,14 @@ class Observer {
         if (newValue == value) return
         
         value = newValue
+        dep.notify()
       },
       get() {
         // console.log('get called')
+        if (Dep.target) {
+          dep.addSub(Dep.target)
+        }
+
         return value
       }
     })
@@ -77,7 +76,9 @@ class Watcher {
   }
 
   get() {
+    Dep.target = this
     let oldVal = this.vm.$data[this.key]
+    Dep.targe = null 
     return oldVal
   }
 
@@ -173,6 +174,14 @@ let Utils = {
       // console.log(vm.$data[args[1]])
       let cnt = expr.replace(/\{\{(.*?)\}\}/g, (...args2) => {
         return vm.$data[args2[1]]
+      })
+
+      new Watcher(vm, args[1], () => {
+        let cnt = expr.replace(/\{\{(.*?)\}\}/g, (...args2) => {
+          return vm.$data[args2[1]]
+        })
+
+        textUpdater(node, cnt)
       })
 
       textUpdater(node, cnt)
