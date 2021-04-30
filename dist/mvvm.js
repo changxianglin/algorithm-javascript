@@ -37,7 +37,7 @@ class Observer {
         value = newValue
       },
       get() {
-        console.log('get called')
+        // console.log('get called')
         return value
       }
     })
@@ -83,8 +83,12 @@ class Compiler {
     }
   }
 
-  compileText() {
-
+  compileText(node) {
+    let exp = /\{\{(.*?)\}\}/g
+    let text = node.textContent
+    if (exp.test(text)) {
+      Utils.text(node, text, this.vm)
+    }
   }
 
   compile(fragment) {
@@ -94,11 +98,12 @@ class Compiler {
       // 编译元素节点的内容
       if (nodeType === 1) {
         this.compileElement(node)
+        this.compile(node)
       }
 
       // 编译文本节点的内容
       if (nodeType === 3) {
-        this.compileText()
+        this.compileText(node)
       }
     })
   }
@@ -116,9 +121,25 @@ let Utils = {
     this.updater.model(node, value)
   },
 
+  text(node, expr, vm) {
+    // 匹配表达式
+    let textUpdater = this.updater.text
+    expr.replace(/\{\{(.*?)\}\}/g, (...args) => {
+      // console.log(vm.$data[args[1]])
+      let cnt = expr.replace(/\{\{(.*?)\}\}/g, (...args2) => {
+        return vm.$data[args2[1]]
+      })
+      
+      textUpdater(node, cnt)
+    })
+  },
+
   updater: {
     model: (node, value) => {
       node.value = value
+    },
+    text: (node, value) => {
+      node.textContent = value
     }
   }
 }
