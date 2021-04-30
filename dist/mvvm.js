@@ -6,6 +6,13 @@ class Mvvm {
 
     new Observer(this.$data)
     new Compiler(this.vm)
+    let watcher = new Watcher(this.vm, 'msg', (newValue, oldVal) => {
+      console.log(newValue, oldVal)
+    })
+
+    let dep = new Dep()
+    dep.addSub(watcher)
+    dep.notify()
   }
 }
 
@@ -41,6 +48,44 @@ class Observer {
         return value
       }
     })
+  }
+}
+
+// 观察者模式 观察者 dep 被观察者 watcher
+class Dep {
+  constructor() {
+    this.subs = []
+  }
+  
+  addSub(watcher) {
+    this.subs.push(watcher)
+  }
+
+  notify() {
+    this.subs.forEach(watcher => {
+      watcher.update()
+    })
+  }
+}
+
+class Watcher {
+  constructor(vm, key, cb) {
+    this.vm = vm
+    this.key = key
+    this.cb = cb
+    this.oldVal = this.get()
+  }
+
+  get() {
+    let oldVal = this.vm.$data[this.key]
+    return oldVal
+  }
+
+  update() {
+    let newVale = this.vm.$data[this.key]
+    if (!this.oldVal != newVale) {
+      this.cb(newVale, this.oldVal)
+    }
   }
 }
 
@@ -129,7 +174,7 @@ let Utils = {
       let cnt = expr.replace(/\{\{(.*?)\}\}/g, (...args2) => {
         return vm.$data[args2[1]]
       })
-      
+
       textUpdater(node, cnt)
     })
   },
