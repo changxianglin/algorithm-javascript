@@ -13,29 +13,23 @@
   </style>
 </head>
 <body>
-  <div id='app'>
-    <h1 v-cloak>{{text}}</h1>
-    <input type="text">
-    <input type="text">
-    <button @click="changeText">按钮</button>
+  <div id="app">
+    <input type="text" v-model="{{msg}}">
+    <div>{{msg}}</div>
+    <div>{{web}}</div>
   </div>
-  <script src="./main.js"></script>
-  <script>
-    new MVVM({
-      el: '#app',
-      data: {
-        text: 'this is a title',
-        student: {
-          name: 'panda'
-        },
-        list: [1, 2, 3, 4]
-      },
-      methods: {
-        changeText() {
-          this.text = 'this is a panda'
-        }
-      }
-    })
-  </script>
+<script src="mvvm.js"></script> 
+<script>
+  let vm = new Mvvm({
+    el: '#app',
+    data: {
+      msg: '文字',
+      web: '模拟 mvvm 框架'
+    }
+  })
+
+  vm.$data.msg = '123'
+  console.log(vm.$data.msg)
+</script>
 </body>
 </html>
